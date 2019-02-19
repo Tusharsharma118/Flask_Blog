@@ -28,8 +28,8 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="/login">Login</a>
-              <a class="nav-item nav-link" href="/register">Register</a>
+              <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a>
+              <a class="nav-item nav-link" href="{{url_for('registration')}}">Register</a>
             </div>
           </div>
         </div>
@@ -38,6 +38,19 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
+            <!--  to find all flash messages of true(success) categories  !-->
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category,message in messages %}
+                <div class="alert alert-{{category}}">
+                    {{ message }}
+                </div>
+
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+
           {% block content_block %}{% endblock %}
         </div>
         <div class="col-md-4">
